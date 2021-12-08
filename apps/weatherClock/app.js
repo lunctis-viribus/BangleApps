@@ -132,3 +132,11 @@ Bangle.loadWidgets();
 Bangle.drawWidgets();
 clockLayout.render();
 draw();
+
+// When unread messages available, twist to view
+var messages = require("Storage").readJSON("messages.json",1)||[];
+if (messages.some(m=>m.new)) {
+  Bangle.on('twist', function() {
+    load("messages.app.js");
+  } );
+}
